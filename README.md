@@ -14,28 +14,12 @@ Lets say you use factory girl and have the following factories:
 factory :post do
   body "My post body"
   title "Some title"
-  association :author
- 
-  factory :post_with_comments do
-    ignore do
-      comments_count 5
-    end
-    
-    after(:create) do |post, evaluator|
-      FactoryGirl.create_list(:comment, evaluator.comments_count, post: post)
-    end
-  end
- 
 end
   
-factory :user, aliases: [:author, :host, :owner] do
+factory :user do
   fullName "John Doe"
 end
- 
-factory :comment
-  sequence(:body) { |n| "My number #{n} comment!" }
-  association :author
-end
+
 ```
 
 Once exposed_factory is setup in your backend, you have a simple api that you can utlize in your client-side javascript integration tests:
@@ -49,14 +33,12 @@ f = ExposedFactory.create();
 // add some strategies to the factory
 f.add("user", "frank" { fullName: "Frank Sinatra" });
 f.add("post", "post");
-f.add("postWithComments", "anotherPost", { commentsCount: 15 });
 
 // building the factory returns a promise
 f.build().then(function(data){
   // `data` contains the built records from your strategies above
   data.get("frank.fullName") // => "Frank Sinatra"
   data.get("post.body") // => "My post body"
-  data.get("anotherPost.comments.length") // => 15
 })
 
 ```
