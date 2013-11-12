@@ -61,6 +61,8 @@ f.build().then(function(data){
 
 ```
 
+For a more complete example of an integration test, see this gist: https://gist.github.com/conrad-vanl/4abdedddfe2503dfc3d9
+
 ## Basic Setup
 
 ### Rails 
