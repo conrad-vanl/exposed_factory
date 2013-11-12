@@ -31,7 +31,7 @@ f = ExposedFactory.create();
 
 // add some strategies to the factory
 f.add("user", "frank" { fullName: "Frank Sinatra" });
-f.add("post", "post");
+f.add("post", "myFirstPost");
 
 // building the factory connects to your Rails app, 
 // runs the strategies that you added (above), and returns an Ember-style 
@@ -39,7 +39,7 @@ f.add("post", "post");
 f.build().then(function(data){
   // `data` contains the built records from your strategies above
   // data.get("frank.fullName") == "Frank Sinatra"
-  // data.get("post.body") == "My post body"
+  // data.get("myFirstPost.body") == "My post body"
 })
 
 ```
