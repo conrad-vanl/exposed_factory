@@ -27,11 +27,7 @@ factory :post do
   end
  
 end
-  
-factory :user, aliases: [:author, :host, :owner] do
-  fullName "John Doe"
-end
- 
+
 factory :comment
   sequence(:body) { |n| "My number #{n} comment!" }
   association :author
