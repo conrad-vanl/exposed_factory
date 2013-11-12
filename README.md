@@ -39,7 +39,7 @@ f.add("post", "post");
 f.build().then(function(data){
   // `data` contains the built records from your strategies above
   // data.get("frank.fullName") == "Frank Sinatra"
-  // data.get("post.body") // == "My post body"
+  // data.get("post.body") == "My post body"
 })
 
 ```
