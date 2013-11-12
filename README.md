@@ -7,6 +7,37 @@ Although this gem is designed to work with Rails, Factory Girl and Ember, it sho
 
 ## Usage
 
+Lets say you use factory girl and have the following factories:
+
+```ruby
+factory :post do
+  body "My post body"
+  title "Some title"
+  association :author
+ 
+  factory :post_with_comments do
+    ignore do
+      comments_count 5
+    end
+    
+    after(:create) do |post, evaluator|
+      FactoryGirl.create_list(:comment, evaluator.comments_count, post: post)
+    end
+  end
+ 
+end
+  
+factory :user, aliases: [:author, :host, :owner] do
+  fullName "John Doe"
+end
+ 
+factory :comment
+  sequence(:body) { |n| "My number #{n} comment!" }
+  association :author
+end
+```
+
+Once exposed_factory is setup in your backend, you have a simple api that you can utlize in your client-side javascript integration tests:
 
 ```javascript
 // create the factory
