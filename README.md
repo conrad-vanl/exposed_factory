@@ -19,7 +19,6 @@ end
 factory :user do
   fullName "John Doe"
 end
-
 ```
 
 Once exposed_factory is setup in your backend, you have a simple api that you can utlize in your client-side javascript integration tests:
@@ -34,7 +33,8 @@ f = ExposedFactory.create();
 f.add("user", "frank" { fullName: "Frank Sinatra" });
 f.add("post", "post");
 
-// building the factory returns a promise
+// building the factory connects to your Rails app, 
+// runs the factories that you added, returns an Ember-style promise
 f.build().then(function(data){
   // `data` contains the built records from your strategies above
   data.get("frank.fullName") // => "Frank Sinatra"
