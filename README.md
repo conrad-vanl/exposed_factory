@@ -10,6 +10,7 @@ Although this gem is designed to work with Rails, Factory Girl and Ember, it sho
 Lets say you use factory girl and have the following factories:
 
 ```ruby
+# my_factories.rb
 factory :post do
   body "My post body"
   title "Some title"
@@ -40,6 +41,8 @@ end
 Once exposed_factory is setup in your backend, you have a simple api that you can utlize in your client-side javascript integration tests:
 
 ```javascript
+// myIntegrationTest.js
+
 // create the factory
 f = ExposedFactory.create();
 
