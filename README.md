@@ -34,7 +34,8 @@ f.add("user", "frank" { fullName: "Frank Sinatra" });
 f.add("post", "post");
 
 // building the factory connects to your Rails app, 
-// runs the factories that you added, returns an Ember-style promise
+// runs the factories that you added, and returns an Ember-style 
+// promise that is fullfilled once everything has finished
 f.build().then(function(data){
   // `data` contains the built records from your strategies above
   data.get("frank.fullName") // => "Frank Sinatra"
