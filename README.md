@@ -38,8 +38,8 @@ f.add("post", "myFirstPost");
 // promise that is fullfilled once everything has finished
 f.build().then(function(data){
   // `data` contains the built records from your strategies above
-  // data.get("frank.fullName") == "Frank Sinatra"
-  // data.get("myFirstPost.body") == "My post body"
+  // data.frank.fullName == "Frank Sinatra"
+  // data.myFirstPost.body == "My post body"
 })
 
 ```
