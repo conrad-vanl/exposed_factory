@@ -54,7 +54,7 @@ include the gem in your development group in your `Gemfile`:
 
 ```ruby
 group :test do
-  gem "exposed_factory",          :github => "https://github.com/conrad-vanl/exposed_factory"
+  gem "exposed_factory",          :github => "conrad-vanl/exposed_factory"
 end
 ```
 
