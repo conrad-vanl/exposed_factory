@@ -11,7 +11,8 @@ window.ExposedFactory = Ember.Object.extend
   #
   # build payloads will have this structure:
   # { label: [ factoryName, arguments ] }
-  _factories: {}
+  # _factories: {}
+  # (set in the initializer)
 
   # the Ember application that is being tested
   app: (-> App if App ).property("App")
@@ -40,6 +41,8 @@ window.ExposedFactory = Ember.Object.extend
     throw "ExposedFactory-Ember depends on jQuery" if typeof jQuery is 'undefined'
     throw "ExposedFactory-Ember: Can't find an Ember Application to test against" if !@get("app")
     throw "ExposedFactory-Ember: API Host is undefined" if typeof @get("apiHost") is ''
+
+    @set("_factories", {})
 
 
   # add a strategy to the factory 
@@ -73,6 +76,18 @@ window.ExposedFactory = Ember.Object.extend
           Ember.run -> reject()
         .always (a,b) =>
           Ember.run => @set("isLoaded", true)
+
+
+  # setup the factory for first time use
+  setup: ->
+    new RSVP.Promise (resolve, reject) =>
+      $.ajax(
+        type: "POST"
+        url: @get("apiHost")+@get("apiPath")+"/setup"
+      )
+        .done((a, b) => Ember.run -> resolve())
+        .fail((a, b) => Ember.run -> reject())
+
 
   ###
   # Private Methods
