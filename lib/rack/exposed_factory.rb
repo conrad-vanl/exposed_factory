@@ -7,7 +7,7 @@ module Rack
         :build_path     => "/build",
         :setup_path     => "/setup",
 
-        :db_setup       => lambda { DatabaseCleaner.clean_with :truncation; DatabaseCleaner.strategy = :truncation },
+        :db_setup       => lambda { DatabaseCleaner.clean_with :truncation; DatabaseCleaner.strategy = :transaction },
         :db_before      => lambda { DatabaseCleaner.start },
         :db_clean       => lambda { DatabaseCleaner.clean },
 
