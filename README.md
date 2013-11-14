@@ -14,27 +14,10 @@ Lets say you use factory girl and have the following factories:
 factory :post do
   body "My post body"
   title "Some title"
-  association :author
- 
-  factory :post_with_comments do
-    ignore do
-      comments_count 5
-    end
-    
-    after(:create) do |post, evaluator|
-      FactoryGirl.create_list(:comment, evaluator.comments_count, post: post)
-    end
-  end
- 
 end
   
-factory :user, aliases: [:author, :host, :owner] do
+factory :user do
   fullName "John Doe"
-end
- 
-factory :comment
-  sequence(:body) { |n| "My number #{n} comment!" }
-  association :author
 end
 ```
 
@@ -48,15 +31,15 @@ f = ExposedFactory.create();
 
 // add some strategies to the factory
 f.add("user", "frank" { fullName: "Frank Sinatra" });
-f.add("post", "post");
-f.add("postWithComments", "anotherPost", { commentsCount: 15 });
+f.add("post", "myFirstPost");
 
-// building the factory returns a promise
+// building the factory connects to your Rails app, 
+// runs the strategies that you added (above), and returns an Ember-style 
+// promise that is fullfilled once everything has finished
 f.build().then(function(data){
   // `data` contains the built records from your strategies above
-  data.get("frank.fullName") // => "Frank Sinatra"
-  data.get("post.body") // => "My post body"
-  data.get("anotherPost.comments.length") // => 15
+  // data.frank.fullName == "Frank Sinatra"
+  // data.myFirstPost.body == "My post body"
 })
 
 ```
@@ -71,7 +54,7 @@ include the gem in your development group in your `Gemfile`:
 
 ```ruby
 group :test do
-  gem "exposed_factory",          :github => "https://github.com/conrad-vanl/exposed_factory"
+  gem "exposed_factory",          :github => "conrad-vanl/exposed_factory"
 end
 ```
 
@@ -86,4 +69,3 @@ then start Rails in test env:
 ```bash
 $ rails server -e test
 ```
-
