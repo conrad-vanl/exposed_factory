@@ -1,6 +1,6 @@
 require "rack/exposed_factory"
 
-if !!Rails
+if !!ActiveRecord::Base
   ActiveRecord::Base.send(:define_method, :include_in_exposed_factory) do 
     @include_in_exposed_factory
   end
